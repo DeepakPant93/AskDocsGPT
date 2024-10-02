@@ -1,0 +1,28 @@
+name: CI-CD for ask-docs-client
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'client/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Login to Docker Hub
+      env:
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USER }}
+        DOCKER_PWD: ${{ secrets.DOCKERHUB_PUSH_TOKEN }}
+      run: echo $DOCKER_PWD | docker login -u $DOCKER_USER --password-stdin
+
+    - name: Build and Push Docker Image
+      working-directory: client
+      run: make build-and-push
+
+    - name: Clean up Docker system
+      run: docker system prune -f
