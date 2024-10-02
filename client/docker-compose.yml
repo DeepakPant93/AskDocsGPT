@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  ask_docs_client:
+    image: deepak93p/ask-docs-client:latest
+    pull_policy: always
+    ports:
+      - "8502:8502"
+    environment:
+      - NAME=ask-docs-client
+      - ASK_DOCS_SERVER_BASIC_AUTH_USERNAME=askdocs-user
+      - ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD=askdocs-password
+      - ASK_DOCS_SERVER_BASE_URL=http://localhost:8000

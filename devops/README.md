@@ -1,0 +1,56 @@
+# DevOps Folder README
+
+## Overview
+The DevOps folder contains the configuration files required to deploy the AskDocGPT application using Docker. The primary component is the `docker-compose.yml` file, which defines the services for both the client and the server, facilitating easy deployment and management of the application.
+
+## Docker Compose Configuration
+The `docker-compose.yml` file defines the following services:
+
+1. **ask_docs_client**: Runs the client application that interacts with the server's APIs.
+2. **ask_docs_server**: Runs the server application that handles requests and interfaces with the GPT model to provide answers.
+
+### Environment Variables
+- **ask_docs_client**:
+  - `NAME`: The name of the client service.
+  - `ASK_DOCS_SERVER_BASIC_AUTH_USERNAME`: Username for basic authentication to the server.
+  - `ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD`: Password for basic authentication to the server.
+  - `ASK_DOCS_SERVER_BASE_URL`: Base URL for the server API.
+
+- **ask_docs_server**:
+  - `NAME`: The name of the server service.
+  - `BASIC_AUTH_USERNAME`: Username for basic authentication.
+  - `BASIC_AUTH_PASSWORD`: Password for basic authentication.
+
+### Health Check
+The server service includes a health check to ensure it is operational. It performs a check every 30 seconds to confirm that the server is accessible.
+
+## Getting Started
+
+### Prerequisites
+- Docker
+- Docker Compose
+
+### Installation
+1. Navigate to the `devops` folder:
+   ```bash
+   cd devops
+   ```
+
+2. Start the application using Docker Compose:
+   ```bash
+   docker-compose up -d
+   ```
+
+3. Access the client interface in your web browser at `http://localhost:8502`.
+
+### Stopping the Services
+To stop the services, run:
+```bash
+docker-compose down
+```
+
+## Troubleshooting
+If you encounter any issues, check the logs for each service by running:
+```bash
+docker-compose logs
+```

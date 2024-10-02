@@ -1,0 +1,5 @@
+fastapi==0.95.0 # For building the API
+fastapi-health==0.4.0 # For health check endpoint
+uvicorn==0.20.0 # For running the API
+pydantic==1.10.4 # For data validation and parsing
+python-dotenv==1.0.0  # For environment variable management
