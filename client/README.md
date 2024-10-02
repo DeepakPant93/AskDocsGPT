@@ -13,6 +13,7 @@ input their queries and receive answers sourced from internal documents.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Environment Variables](#environment-variables)
+- [Setup Guide](#setup-guide)
 
 ## Features
 
@@ -64,3 +65,7 @@ Make sure to configure the following environment variables for connecting to the
 - `ASK_DOCS_SERVER_BASIC_AUTH_USERNAME=username`
 - `ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD=password`
 - `ASK_DOCS_SERVER_BASE_URL=http://ask_docs_server:8000` (or the appropriate URL if hosted elsewhere)
+
+## Setup Guide
+
+Please refer to the [Setup Guide](docs/SETUP.md) for a more detailed setup process.

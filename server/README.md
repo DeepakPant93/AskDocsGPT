@@ -8,6 +8,7 @@
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
 - [Documentation](#documentation)
+- [Setup Guide](#setup-guide)
 
 ## Overview
 
@@ -58,3 +59,7 @@ documentation at:
 
 - **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
 - **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+
+## Setup Guide
+
+Please refer to the [Setup Guide](docs/SETUP.md) for a more detailed setup process.
