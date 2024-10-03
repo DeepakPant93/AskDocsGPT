@@ -15,6 +15,9 @@ class Settings:
     ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD: str = os.environ["ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD"]
     ASK_DOCS_SERVER_BASE_URL: str = os.environ["ASK_DOCS_SERVER_BASE_URL"]
 
+    MIN_INPUT_LENGTH: int = 3
+    MAX_INPUT_LENGTH: int = 250
+
     class Config:
         env_file = ".env"
 

@@ -13,7 +13,7 @@ class Document(BaseModel):
 
 
 class QuestionRequest(BaseModel):
-    question: str = Field(..., min_length=3, max_length=4000, description="Input Question for the modal.")
+    question: str = Field(..., min_length=3, max_length=250, description="Input Question for the modal.")
 
 
 class AnswerResponse(BaseModel):

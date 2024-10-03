@@ -4,6 +4,7 @@
 
 import streamlit as st
 
+from ..core.config import settings
 from ..schema.v1.prompt_schema import AnswerResponse
 from ..service.askdoc_service import AskDocsService
 
@@ -22,7 +23,7 @@ class AskDocsApp:
         output = DEFAULT_OUTPUT_MSG
         source_docs = None
 
-        if input_text:
+        if input_text and settings.MIN_INPUT_LENGTH <= len(input_text) <= settings.MAX_INPUT_LENGTH:
             try:
                 # Invoke the service to get the response containing the answer and source documents
                 response: AnswerResponse = await self.service.ask(input_text)
@@ -42,8 +43,9 @@ class AskDocsApp:
                 for idx, doc in enumerate(source_docs, start=1):
                     with st.expander(f"Document {idx}:"):
                         st.markdown(f"**Content**: {doc.get('page_content')}")
-                        st.markdown(f"**Page**: {doc.get('metadata').get('page')}")
                         st.markdown(f"**Source**: {doc.get('metadata').get('source')}")
 
             st.markdown("---")
             st.caption("Powered by AskDocsGPT")
+        else:
+            st.error("Please enter a question between 3 to 250 characters.")

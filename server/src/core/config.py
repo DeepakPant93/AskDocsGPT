@@ -27,6 +27,9 @@ class Settings(BaseSettings):
     CHUNK_SIZE: int = 1000
     CHUNK_OVERLAP: int = 20
 
+    ## Other settings
+    MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
+
     class Config:
         env_file = ".env"
 

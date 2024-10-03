@@ -3,10 +3,13 @@
 
 import os
 import tempfile
+from http import HTTPStatus
 
 from fastapi import APIRouter, UploadFile, File
 from fastapi import Depends
 
+from ...core.config import settings
+from ...core.exception import ADException
 from ...schema.v1.schema import AnswerResponse, QuestionRequest, FileType
 from ...service.document_loader import DocumentLoaderService
 from ...service.qa_service import QAService
@@ -39,16 +42,28 @@ async def load(file_type: FileType, file: UploadFile = File(...),
 
     Args:
     - file_type (FileType): The type of file to load. Supported file types: PDF
-    - file (UploadFile): The file to load.
+    - file (UploadFile): The file to load. Max file size: 10 MB
 
     Returns:
     - str: A message indicating the success of loading and indexing the document chunks.
 
     """
-    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+    original_name = file.filename
+    # file_size = await file.seek(0)  # Get the file size
+    # await file.seek(0)  # Reset file pointer to the beginning
+    #
+    # # Check if the file size exceeds 10 MB (10 * 1024 * 1024 bytes)
+    # if file_size > settings.MAX_FILE_SIZE:
+    #     raise ADException(status_code=HTTPStatus.BAD_REQUEST,
+    #                       detail="File size exceeds 10 MB. Please upload a smaller file.")
+
+    # Create the temporary file with the original name in the system's temp directory
+    temp_file_path = os.path.join(tempfile.gettempdir(), original_name)
+
+    # Write the content to a temporary file with the original name
+    with open(temp_file_path, 'wb') as temp_file:
         content = await file.read()
         temp_file.write(content)
-        temp_file_path = temp_file.name
     try:
         documents = await loader_srv.load_from_documents(file_type, temp_file_path)
         await vector_srv.add_items(documents)
