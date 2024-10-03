@@ -8,6 +8,6 @@ services:
       - "8502:8502"
     environment:
       - NAME=ask-docs-client
-      - ASK_DOCS_SERVER_BASIC_AUTH_USERNAME=askdocs-user
-      - ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD=askdocs-password
+      - ASK_DOCS_SERVER_BASIC_AUTH_USERNAME=username
+      - ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD=password
       - ASK_DOCS_SERVER_BASE_URL=http://localhost:8000

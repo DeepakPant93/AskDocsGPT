@@ -8,8 +8,14 @@ services:
       - "8000:8000"
     environment:
       - NAME=ask-docs-server
-      - BASIC_AUTH_USERNAME=askdocs-user
-      - BASIC_AUTH_PASSWORD=askdocs-password
+      - BASIC_AUTH_USERNAME=username
+      - BASIC_AUTH_PASSWORD=password
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - PINECONE_HOST=${PINECONE_HOST}
+      - PINECONE_INDEX_NAME=askdocs
+      - MODEL_NAME=gpt-3.5-turbo
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
       interval: 30s

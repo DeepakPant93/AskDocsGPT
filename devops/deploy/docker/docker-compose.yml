@@ -8,8 +8,8 @@ services:
       - "8502:8502"
     environment:
       - NAME=ask-docs-client
-      - ASK_DOCS_SERVER_BASIC_AUTH_USERNAME=askdocs-user
-      - ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD=askdocs-password
+      - ASK_DOCS_SERVER_BASIC_AUTH_USERNAME=${SERVER_BASIC_AUTH_USERNAME}
+      - ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD=${SERVER_BASIC_AUTH_PASSWORD}
       - ASK_DOCS_SERVER_BASE_URL=http://ask_docs_server:8000  # Corrected service name
 
   ask_docs_server:
@@ -19,8 +19,14 @@ services:
       - "8000:8000"
     environment:
       - NAME=ask-docs-server
-      - BASIC_AUTH_USERNAME=askdocs-user
-      - BASIC_AUTH_PASSWORD=askdocs-password
+      - BASIC_AUTH_USERNAME=${SERVER_BASIC_AUTH_USERNAME}
+      - BASIC_AUTH_PASSWORD=${SERVER_BASIC_AUTH_PASSWORD}
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - PINECONE_HOST=${PINECONE_HOST}
+      - PINECONE_INDEX_NAME=askdocs
+      - MODEL_NAME=gpt-3.5-turbo
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
