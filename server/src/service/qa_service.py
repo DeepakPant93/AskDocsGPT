@@ -8,7 +8,6 @@ from langchain.llms import OpenAI
 from .vector_store_service import VectorStoreService
 from ..core.config import settings
 from ..core.logger import logger
-# from ..repository.vector_store import VectorStoreRepository
 from ..schema.v1.schema import AnswerResponse, Document
 
 
@@ -18,9 +17,18 @@ class QAService:
         self.chain = load_qa_chain(self.llm, chain_type="stuff")
         self.vector_srv = vector_srv
 
-    def ask(self, question: str):
+    async def ask(self, question: str):
+        """
+        Ask a question and get the answer with relevant source documents.
+
+        Args:
+        question (str): The question to ask
+
+        Returns:
+        AnswerResponse: The answer with relevant source documents
+        """
         logger.info("Asking question: %s", question)
-        similar_documents = self.vector_srv.get_similar_documents(question)
+        similar_documents = await self.vector_srv.get_similar_documents(question)
         answer = self.chain.run(input_documents=similar_documents, question=question)
         source_docs = [Document(page_content=docs.page_content, metadata=docs.metadata) for docs in
                        similar_documents]

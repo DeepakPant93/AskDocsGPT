@@ -13,12 +13,10 @@ from ..core.logger import logger
 from ..schema.v1.prompt_schema import AnswerResponse
 
 
-# import httpx
-
-
 class AskDocsAPIProxy:
     def __init__(self):
         self.base_url = settings.ASK_DOCS_SERVER_BASE_URL.rstrip('/') + '/api/v1'
+        self.health_check_url = settings.ASK_DOCS_SERVER_BASE_URL.rstrip('/') + '/health'
         self.auth_header = self._create_auth_header(settings.ASK_DOCS_SERVER_BASIC_AUTH_USERNAME,
                                                     settings.ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD)
         self.headers = {
@@ -42,11 +40,9 @@ class AskDocsAPIProxy:
             logger.error(f"Failed to get answer from ask-docs backend service: {e}")
             raise
 
-    @staticmethod
-    async def health_check() -> Dict[str, str]:
+    async def health_check(self) -> Dict[str, str]:
         try:
-            health_check_url = settings.ASK_DOCS_SERVER_BASE_URL.rstrip('/') + '/health'
-            response = requests.get(health_check_url)
+            response = requests.get(self.health_check_url)
             logger.info(f"Health check passed for ask-docs backend service")
             return response.json()
         except Exception as e:

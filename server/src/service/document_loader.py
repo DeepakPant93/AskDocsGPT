@@ -17,19 +17,32 @@ class DocumentLoaderService:
             chunk_overlap=settings.CHUNK_OVERLAP
         )
 
-    def load_from_directory(self, directory_path: str):
+    async def load_from_directory(self, directory_path: str):
         loader = DirectoryLoader(directory_path, glob="**/*.pdf", loader_cls=PyPDFLoader)
         documents = loader.load()
         return self.text_splitter.split_documents(documents)
 
-    def load_from_pdf(self, file_path: str):
+    async def load_from_pdf(self, file_path: str):
         loader = PyPDFLoader(file_path)
         documents = loader.load()
         return self.text_splitter.split_documents(documents)
 
-    def load_from_documents(self, file_type: FileType, file_path: str):
+    async def load_from_documents(self, file_type: FileType, file_path: str):
+        """
+        Load documents from a given file path.
+
+        Args:
+            file_type (FileType): The type of file to load.
+            file_path (str): The path to the file to load.
+
+        Returns:
+            A list of Document objects.
+
+        Raises:
+            ValueError: If the file type is not supported.
+        """
         logger.info(f"Loading documents from {file_path}")
         if file_type == FileType.PDF:
-            return self.load_from_pdf(file_path)
+            return await self.load_from_pdf(file_path)
         else:
             raise ValueError(f"Unsupported file type: {file_type}")

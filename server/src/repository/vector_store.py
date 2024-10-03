@@ -16,7 +16,7 @@ class VectorStoreRepository:
         self.pc = Pinecone(api_key=settings.PINECONE_API_KEY)
         self.index = self.pc.Index(settings.PINECONE_INDEX_NAME)
 
-    def add_items(self, documents):
+    async def add_items(self, documents):
         vector_store = PineconeVectorStore(index=self.index, embedding=self.embeddings)
 
         # Add documents to the vector store
@@ -24,6 +24,6 @@ class VectorStoreRepository:
         vector_store.add_documents(documents=documents, ids=uuids)
         return uuids
 
-    def get_similar_documents(self, query: str, k: int = 2):
+    async def get_similar_documents(self, query: str, k: int = 2):
         vector_store = PineconeVectorStore(index=self.index, embedding=self.embeddings)
         return vector_store.similarity_search(query, k=k)
