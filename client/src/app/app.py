@@ -7,7 +7,7 @@ import streamlit as st
 from ..schema.v1.prompt_schema import AnswerResponse
 from ..service.askdoc_service import AskDocsService
 
-DEFAULT_OUTPUT_MSG: str = "Please ask something related to docs to get started."
+DEFAULT_OUTPUT_MSG: str = "There was a problem processing your request. Please try again after some time."
 
 
 class AskDocsApp:
@@ -20,14 +20,19 @@ class AskDocsApp:
         st.title('AskDocsGPT')
         input_text = st.text_input("Search anything related to docs...")
         output = DEFAULT_OUTPUT_MSG
+        source_docs = None
 
         if input_text:
-            # Invoke the service to get the response containing the answer and source documents
-            response: AnswerResponse = await self.service.ask(input_text)
+            try:
+                # Invoke the service to get the response containing the answer and source documents
+                response: AnswerResponse = await self.service.ask(input_text)
 
-            # Extract the answer and source documents from the response
-            output = response.answer
-            source_docs = response.source_documents
+                # Extract the answer and source documents from the response
+                output = response.answer
+                source_docs = response.source_documents
+            except:
+                st.error(output)
+                return
 
             st.write(f"**{output}**")
 
