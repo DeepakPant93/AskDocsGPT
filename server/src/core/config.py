@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     # Settings for OpenAI
     OPENAI_API_KEY: str
     MODEL_NAME: str = "gpt-3.5-turbo"
+    TEMPERATURE: float = 0.5
+    MAX_TOKENS: int = 200
 
     # Settings for Langchain
     LANGCHAIN_API_KEY: str

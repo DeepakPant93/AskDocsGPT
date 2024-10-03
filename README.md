@@ -65,9 +65,14 @@ Make sure to set the following environment variables before running the applicat
   - `ASK_DOCS_SERVER_BASE_URL=http://ask_docs_server:8000`
 
 - For **ask_docs_server**:
-  - `NAME=ask-docs-server`
-  - `BASIC_AUTH_USERNAME=askdocs-user`
-  - `BASIC_AUTH_PASSWORD=askdocs-password`
+  - `BASIC_AUTH_USERNAME=username`
+  - `BASIC_AUTH_PASSWORD=password`
+  - `LANGCHAIN_API_KEYLANGCHAIN_API_KEY=your_langchain_api_key`
+  - `OPENAI_API_KEY=your_openai_api_key`
+  - `PINECONE_API_KEY=your_pinecone_api_key`
+  - `PINECONE_HOST=your_pinecone_host`
+  - `PINECONE_INDEX_NAME=askdocs`
+  - `MODEL_NAME=gpt-3.5-turbo`
 
 ## Development
 - Use the appropriate IDE or code editor for your component (e.g., Python for the server, JavaScript/HTML/CSS for the client).

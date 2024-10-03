@@ -13,7 +13,8 @@ from ..schema.v1.schema import AnswerResponse, Document
 
 class QAService:
     def __init__(self, vector_srv: VectorStoreService = Depends()):
-        self.llm = OpenAI(model_name=settings.MODEL_NAME, openai_api_key=settings.OPENAI_API_KEY)
+        self.llm = OpenAI(model_name=settings.MODEL_NAME, openai_api_key=settings.OPENAI_API_KEY,
+                          temperature=settings.TEMPERATURE, max_tokens=settings.MAX_TOKENS)
         self.chain = load_qa_chain(self.llm)
         self.vector_srv = vector_srv
 
