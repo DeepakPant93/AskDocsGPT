@@ -70,7 +70,6 @@ Make sure to configure the following environment variables to start the server:
 - `LANGCHAIN_API_KEYLANGCHAIN_API_KEY=your_langchain_api_key`
 - `OPENAI_API_KEY=your_openai_api_key`
 - `PINECONE_API_KEY=your_pinecone_api_key`
-- `PINECONE_HOST=your_pinecone_host`
 - `PINECONE_INDEX_NAME=askdocs`
 - `MODEL_NAME=gpt-3.5-turbo`
 

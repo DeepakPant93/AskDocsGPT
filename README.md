@@ -83,7 +83,6 @@ Make sure to set the following environment variables before running the applicat
     - `LANGCHAIN_API_KEY=your_langchain_api_key`
     - `OPENAI_API_KEY=your_openai_api_key`
     - `PINECONE_API_KEY=your_pinecone_api_key`
-    - `PINECONE_HOST=your_pinecone_host`
     - `PINECONE_INDEX_NAME=askdocs`
     - `MODEL_NAME=gpt-3.5-turbo`
 

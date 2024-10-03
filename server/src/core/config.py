@@ -21,7 +21,6 @@ class Settings(BaseSettings):
 
     ## Settings for Pinecone
     PINECONE_API_KEY: str
-    PINECONE_HOST: str
     PINECONE_INDEX_NAME: str = "askdocs"
 
     CHUNK_SIZE: int = 1000

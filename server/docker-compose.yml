@@ -13,7 +13,6 @@ services:
       - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - PINECONE_API_KEY=${PINECONE_API_KEY}
-      - PINECONE_HOST=${PINECONE_HOST}
       - PINECONE_INDEX_NAME=askdocs
       - MODEL_NAME=gpt-3.5-turbo
     healthcheck:
