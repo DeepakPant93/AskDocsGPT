@@ -1,5 +1,6 @@
 # Copyright (c) 2024 Deepak Pant. All rights reserved.
 # This file is part of the AskDocsGPT project.
+
 from uuid import uuid4
 
 from langchain.embeddings.openai import OpenAIEmbeddings
