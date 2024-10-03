@@ -1,5 +1,5 @@
 # Stage 1: Build the wheel file
-FROM python:3.9-slim AS builder
+FROM python:3.10-slim AS builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir setuptools wheel
 RUN python setup.py bdist_wheel
 
 # Stage 2: Create the final image
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 # Set the working directory in the container
 WORKDIR /app
