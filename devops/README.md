@@ -10,16 +10,21 @@ The `docker-compose.yml` file defines the following services:
 2. **ask_docs_server**: Runs the server application that handles requests and interfaces with the GPT model to provide answers.
 
 ### Environment Variables
-- **ask_docs_client**:
-  - `NAME`: The name of the client service.
-  - `ASK_DOCS_SERVER_BASIC_AUTH_USERNAME`: Username for basic authentication to the server.
-  - `ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD`: Password for basic authentication to the server.
-  - `ASK_DOCS_SERVER_BASE_URL`: Base URL for the server API.
+To run the services, you need to create a `.env` file with the following content. Replace the placeholder values with your actual configuration:
 
-- **ask_docs_server**:
-  - `NAME`: The name of the server service.
-  - `BASIC_AUTH_USERNAME`: Username for basic authentication.
-  - `BASIC_AUTH_PASSWORD`: Password for basic authentication.
+```plaintext
+# Basic Auth credentials
+SERVER_BASIC_AUTH_USERNAME=your_username_here
+SERVER_BASIC_AUTH_PASSWORD=your_password_here
+
+# API Keys
+LANGCHAIN_API_KEY=your_langchain_api_key_here
+OPENAI_API_KEY=your_openai_api_key_here
+PINECONE_API_KEY=your_pinecone_api_key_here
+
+# Pinecone Host
+PINECONE_HOST=your_pinecone_host_here
+```
 
 ### Health Check
 The server service includes a health check to ensure it is operational. It performs a check every 30 seconds to confirm that the server is accessible.
@@ -36,12 +41,14 @@ The server service includes a health check to ensure it is operational. It perfo
    cd devops
    ```
 
-2. Start the application using Docker Compose:
+2. Create a `.env` file with the necessary variables (see the Environment Variables section above).
+
+3. Start the application using Docker Compose:
    ```bash
    docker-compose up -d
    ```
 
-3. Access the client interface in your web browser at `http://localhost:8502`.
+4. Access the client interface in your web browser at `http://localhost:8502`.
 
 ### Stopping the Services
 To stop the services, run:
@@ -53,4 +60,3 @@ docker-compose down
 If you encounter any issues, check the logs for each service by running:
 ```bash
 docker-compose logs
-```
