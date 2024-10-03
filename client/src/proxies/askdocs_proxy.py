@@ -10,7 +10,7 @@ import requests
 from ..core.config import settings
 from ..core.context import request_id_context
 from ..core.logger import logger
-from ..schema.v1.prompt_schema import PromptOutputSchema
+from ..schema.v1.prompt_schema import AnswerResponse
 
 
 # import httpx
@@ -31,13 +31,13 @@ class AskDocsAPIProxy:
         encoded_credentials = base64.b64encode(credentials.encode()).decode()
         return f"Basic {encoded_credentials}"
 
-    async def invoke(self, request: str) -> PromptOutputSchema:
+    async def ask(self, request: str) -> AnswerResponse:
         try:
             response = requests.post(
-                url=f"{self.base_url}/prompt/invoke",
+                url=f"{self.base_url}/docs/ask",
                 headers=self.headers,
                 json={'question': request})
-            return PromptOutputSchema(**response.json())
+            return AnswerResponse(**response.json())
         except Exception as e:
             logger.error(f"Failed to get answer from ask-docs backend service: {e}")
             raise

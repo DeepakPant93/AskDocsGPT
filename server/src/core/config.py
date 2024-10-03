@@ -10,6 +10,21 @@ class Settings(BaseSettings):
     BASIC_AUTH_USERNAME: str
     BASIC_AUTH_PASSWORD: str
 
+    # Settings for OpenAI
+    OPENAI_API_KEY: str
+    MODEL_NAME: str = "gpt-3.5-turbo"
+
+    # Settings for Langchain
+    LANGCHAIN_API_KEY: str
+
+    ## Settings for Pinecone
+    PINECONE_API_KEY: str
+    PINECONE_HOST: str
+    PINECONE_INDEX_NAME: str = "askdocs"
+
+    CHUNK_SIZE: int = 1000
+    CHUNK_OVERLAP: int = 20
+
     class Config:
         env_file = ".env"
 

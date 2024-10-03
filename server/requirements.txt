@@ -3,3 +3,12 @@ fastapi-health==0.4.0 # For health check endpoint
 uvicorn==0.20.0 # For running the API
 pydantic==1.10.4 # For data validation and parsing
 python-dotenv==1.0.0  # For environment variable management
+langchain==0.0.184  # For using the LangChain library
+openai==0.27.8  # For using the OpenAI API
+pinecone-client  # For using the Pinecone vector database
+PyPDF2==3.0.1  # For reading PDFs
+python-multipart==0.0.12  # For uploading files
+pypdf==5.0.1  # For reading PDFs
+cryptography==43.0.1  # For using the OpenAI API
+langchain_pinecone==0.1.3  # For using the Pinecone vector database
+tiktoken==0.7.0  # For using the OpenAI API

@@ -1,5 +1,5 @@
-# Copyright (c) 2024 AwesomeHelpersInc. All rights reserved.
-# This file is part of the EmailerWorker project.
+# Copyright (c) 2024 Deepak Pant. All rights reserved.
+# This file is part of the AskDocsGPT project.
 
 import os
 import sys
@@ -12,7 +12,7 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi_health import health
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from src.api.v1.prompt_router import router as prompt_router
+from src.api.v1.router import router as router
 from src.core.config import settings
 from src.core.context import request_id_context
 
@@ -75,8 +75,7 @@ app.add_middleware(RequestIDMiddleware)
 
 # Include routers
 app.add_api_route("/health", health([health_check]), tags=["Management"], description="Management APIs")
-
-app.include_router(prompt_router, prefix="/api/v1/prompt", tags=["Prompt Operations"],
+app.include_router(router, prefix="/api/v1/docs", tags=[" Docs Operations"],
                    dependencies=[Depends(auth_dependency)])
 
 
@@ -94,18 +93,6 @@ def custom_openapi():
 
 
 app.openapi = custom_openapi
-
-
-@app.on_event("startup")
-async def startup_db_client():
-    pass
-
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    # await close_mongo_connection()
-    pass
-
 
 if __name__ == "__main__":
     import uvicorn
