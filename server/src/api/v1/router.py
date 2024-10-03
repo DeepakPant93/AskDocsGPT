@@ -1,6 +1,7 @@
 # Copyright (c) 2024 Deepak Pant. All rights reserved.
 # This file is part of the AskDocsGPT project.
 
+import mimetypes
 import os
 import tempfile
 from http import HTTPStatus
@@ -49,13 +50,12 @@ async def load(file_type: FileType, file: UploadFile = File(...),
 
     """
     original_name = file.filename
-    # file_size = await file.seek(0)  # Get the file size
-    # await file.seek(0)  # Reset file pointer to the beginning
-    #
-    # # Check if the file size exceeds 10 MB (10 * 1024 * 1024 bytes)
-    # if file_size > settings.MAX_FILE_SIZE:
-    #     raise ADException(status_code=HTTPStatus.BAD_REQUEST,
-    #                       detail="File size exceeds 10 MB. Please upload a smaller file.")
+    uploaded_file_type, _ = mimetypes.guess_type(original_name)
+
+    # Check if the uploaded file is a PDF file
+    if file_type != FileType.PDF or uploaded_file_type != "application/pdf":
+        raise ADException(status_code=HTTPStatus.BAD_REQUEST,
+                          detail="Only PDF files are allowed.")
 
     # Create the temporary file with the original name in the system's temp directory
     temp_file_path = os.path.join(tempfile.gettempdir(), original_name)
@@ -63,6 +63,12 @@ async def load(file_type: FileType, file: UploadFile = File(...),
     # Write the content to a temporary file with the original name
     with open(temp_file_path, 'wb') as temp_file:
         content = await file.read()
+
+        # Check if the uploaded file is too large
+        if len(content) > settings.MAX_FILE_SIZE:
+            raise ADException(status_code=HTTPStatus.BAD_REQUEST,
+                              detail=f"File size exceeds {settings.MAX_FILE_SIZE} Bytes. Please upload a smaller file.")
+
         temp_file.write(content)
     try:
         documents = await loader_srv.load_from_documents(file_type, temp_file_path)
