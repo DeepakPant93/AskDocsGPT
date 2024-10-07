@@ -49,17 +49,24 @@ The server service includes a health check to ensure it is operational. It perfo
 ### Installation
 1. Navigate to the `devops` folder:
    ```bash
-   cd devops
+   cd devops/deploy/docker
    ```
 
-2. Create a `.env` file with the necessary variables (see the Environment Variables section above).
+2. Start the Caddy server:
 
-3. Start the application using Docker Compose:
+   ```bash
+   cd caddy
+   docker-compose up -d caddy
+   ```
+
+3. Create a `.env` file with the necessary variables (see the Environment Variables section above).
+
+4. Start the application using Docker Compose:
    ```bash
    docker-compose up -d
    ```
 
-4. Access the client interface in your web browser at `http://localhost:8502`.
+5. Access the client interface in your web browser at `http://localhost`.
 
 ### Stopping the Services
 To stop the services, run:

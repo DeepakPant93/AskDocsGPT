@@ -1,0 +1,43 @@
+{
+    admin off
+    auto_https off    # Disable automatic HTTPS
+    local_certs
+}
+
+:443 {
+    tls internal {
+        on_demand
+    }
+
+    handle /health {                    # Health check endpoint
+        reverse_proxy http://ask_docs_server:8000
+    }
+
+    handle /openapi.json {              # Swagger JSON download
+        reverse_proxy http://ask_docs_server:8000
+    }
+
+    handle /docs {                      # Swagger UI endpoint
+        reverse_proxy http://ask_docs_server:8000
+    }
+
+    handle /api/* {                     # API endpoint
+        reverse_proxy http://ask_docs_server:8000 {
+            header_up X-Original-URL {uri}
+        }
+    }
+
+    handle {                            # Web Client
+        reverse_proxy http://ask_docs_client:8502
+    }
+
+    log {
+        output stdout
+        format console
+    }
+}
+
+
+:80 {
+    redir https://{host}{uri} permanent
+}

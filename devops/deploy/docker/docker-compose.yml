@@ -1,22 +1,23 @@
-version: '3.8'
-
 services:
   ask_docs_client:
     image: deepak93p/ask-docs-client:latest
     pull_policy: always
-    ports:
-      - "8502:8502"
+#    ports:           # Uncomment if you want to expose the client to the internet
+#      - "8502:8502"
     environment:
       - NAME=ask-docs-client
       - ASK_DOCS_SERVER_BASIC_AUTH_USERNAME=${SERVER_BASIC_AUTH_USERNAME}
       - ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD=${SERVER_BASIC_AUTH_PASSWORD}
       - ASK_DOCS_SERVER_BASE_URL=http://ask_docs_server:8000  # Corrected service name
+    networks:
+      - caddy_network
+
 
   ask_docs_server:
     image: deepak93p/ask-docs-server:latest
     pull_policy: always
-    ports:
-      - "8000:8000"
+#    ports:               # Uncomment if you want to expose the client to the internet
+#      - "8000:8000"
     environment:
       - NAME=ask-docs-server
       - BASIC_AUTH_USERNAME=${SERVER_BASIC_AUTH_USERNAME}
@@ -27,10 +28,16 @@ services:
       - PINECONE_INDEX_NAME=askdocs
       - MODEL_NAME=gpt-3.5-turbo
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 10s
     depends_on:
-      - ask_docs_client  # Specify that the server depends on the client
+      - ask_docs_client
+    networks:
+      - caddy_network
+
+networks:
+  caddy_network:    # The network is managed by caddy go to caddy/docker-compose.yml to add it
+    external: true

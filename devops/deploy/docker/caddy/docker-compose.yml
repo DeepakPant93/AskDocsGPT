@@ -1,0 +1,18 @@
+services:
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/caddy_data:/data  # Store certificates outside the container
+      - $PWD/caddy_config:/config
+    networks:
+      - caddy_network
+
+networks:
+  caddy_network:
+    driver: bridge
