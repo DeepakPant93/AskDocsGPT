@@ -37,7 +37,7 @@ clean:
 # Setup for virtual environment and install the application requirements
 .PHONY: venv
 venv:
-	conda create --name .venv python=3.10
+	conda create --name .venv python=3.10 -y
 	conda init
 	conda activate .venv
 
