@@ -3,7 +3,7 @@
 
 
 import logging
-
+import os
 from ..core.context import request_id_context
 
 
@@ -16,23 +16,42 @@ class RequestIDLogFilter(logging.Filter):
         return True
 
 
+# Function to configure the logger
 def setup_logger():
+
+    # Ensure the directory exists
+    log_dir = '/tmp/askdocsgpt'
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+
     logger = logging.getLogger("ask_docs_server_logger")
     logger.setLevel(logging.INFO)
 
-    handler = logging.StreamHandler()
-    handler.setLevel(logging.INFO)
+    # StreamHandler for console logging
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(logging.INFO)
+
+    # FileHandler for logging to a file
+    file_handler = logging.FileHandler(f'{log_dir}/server.log')
+    file_handler.setLevel(logging.INFO)
 
     # Custom log format that includes request_id
     formatter = logging.Formatter(
         '%(asctime)s - %(request_id)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(funcName)s() - %(message)s'
     )
-    handler.setFormatter(formatter)
 
-    # Add the custom filter to include request_id in every log entry
-    handler.addFilter(RequestIDLogFilter())
+    # Set formatter for both handlers
+    stream_handler.setFormatter(formatter)
+    file_handler.setFormatter(formatter)
 
-    logger.addHandler(handler)
+    # Add custom filter for request_id to both handlers
+    stream_handler.addFilter(RequestIDLogFilter())
+    file_handler.addFilter(RequestIDLogFilter())
+
+    # Add handlers to logger
+    logger.addHandler(stream_handler)
+    logger.addHandler(file_handler)
+
     return logger
 
 

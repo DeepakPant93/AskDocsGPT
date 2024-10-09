@@ -41,6 +41,13 @@ venv:
 	conda init
 	conda activate .venv
 
+
+# Activate the virtual environment
+.PHONY: venv-activate
+venv-activate:
+	conda activate .venv
+
+
 # Destroy the virtual environment
 .PHONY: destroy-venv
 destroy-venv:

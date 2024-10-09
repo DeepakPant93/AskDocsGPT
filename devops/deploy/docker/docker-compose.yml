@@ -2,8 +2,8 @@ services:
   ask_docs_client:
     image: deepak93p/ask-docs-client:latest
     pull_policy: always
-#    ports:           # Uncomment if you want to expose the client to the internet
-#      - "8502:8502"
+    #    ports:           # Uncomment if you want to expose the client to the internet
+    #      - "8502:8502"
     environment:
       - NAME=ask-docs-client
       - ASK_DOCS_SERVER_BASIC_AUTH_USERNAME=${SERVER_BASIC_AUTH_USERNAME}
@@ -11,13 +11,15 @@ services:
       - ASK_DOCS_SERVER_BASE_URL=http://ask_docs_server:8000  # Corrected service name
     networks:
       - caddy_network
+    volumes:
+      - /tmp/askdocsgpt:/tmp/askdocsgpt
 
 
   ask_docs_server:
     image: deepak93p/ask-docs-server:latest
     pull_policy: always
-#    ports:               # Uncomment if you want to expose the client to the internet
-#      - "8000:8000"
+    #    ports:               # Uncomment if you want to expose the client to the internet
+    #      - "8000:8000"
     environment:
       - NAME=ask-docs-server
       - BASIC_AUTH_USERNAME=${SERVER_BASIC_AUTH_USERNAME}
@@ -37,7 +39,10 @@ services:
       - ask_docs_client
     networks:
       - caddy_network
+    volumes:
+      - /tmp/askdocsgpt:/tmp/askdocsgpt
+
 
 networks:
-  caddy_network:    # The network is managed by caddy go to caddy/docker-compose.yml to add it
+  caddy_network: # The network is managed by caddy go to caddy/docker-compose.yml to add it
     external: true

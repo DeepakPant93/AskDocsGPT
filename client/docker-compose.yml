@@ -11,3 +11,5 @@ services:
       - ASK_DOCS_SERVER_BASIC_AUTH_USERNAME=username
       - ASK_DOCS_SERVER_BASIC_AUTH_PASSWORD=password
       - ASK_DOCS_SERVER_BASE_URL=http://localhost:8000
+    volumes:
+      - /tmp/askdocsgpt:/tmp/askdocsgpt
