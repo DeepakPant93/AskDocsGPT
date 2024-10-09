@@ -34,7 +34,8 @@ class QAService:
 
         # Define the prompt template to prevent the system from returning inappropriate or irrelevant answers
         prompt_template = """
-                You are an expert assistant. Based on the following documents and question, provide only the answer without any additional explanations or information. If the documents do not contain a relevant answer, respond with "{negative_response}".
+                You are an expert assistant. Based on the following documents and question, provide only the answer without any additional explanations or information. 
+                If the documents do not contain a relevant answer, respond with "{negative_response}".
                 
                 Documents:
                 {documents}

@@ -22,6 +22,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 # Custom security scheme for JWT
 security = HTTPBasic()
 
+# Set the LANGCHAIN_API_KEY as an environment variable
+os.environ["LANGCHAIN_API_KEY"] = settings.LANGCHAIN_API_KEY
+
 
 def verify_credentials(credentials: HTTPBasicCredentials):
     """Check if the provided username and password are correct."""
