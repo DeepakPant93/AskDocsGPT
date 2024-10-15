@@ -1,5 +1,12 @@
 # Architecture Components Explanation
+ 
+### HLD Diagram
+![HLD Diagram](images/HLD-diagram.png)
 
+### Sequence Diagram
+![Sequence Diagram](images/sequence-diagram.png)
+
+### Low-Level Architectural Diagram
 ![Architectural Diagram](images/low-level-architectural-diagram.png)
 
 ## 1. Client Layer
