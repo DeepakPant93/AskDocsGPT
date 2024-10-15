@@ -1,10 +1,10 @@
 # Architecture Components Explanation
  
 ### HLD Diagram
-![HLD Diagram](images/HLD-diagram.png)
+![HLD Diagram](images/HLD-diagram.jpeg)
 
 ### Sequence Diagram
-![Sequence Diagram](images/sequence-diagram.png)
+![Sequence Diagram](images/sequence-diagram.jpeg)
 
 ### Low-Level Architectural Diagram
 ![Architectural Diagram](images/low-level-architectural-diagram.png)
