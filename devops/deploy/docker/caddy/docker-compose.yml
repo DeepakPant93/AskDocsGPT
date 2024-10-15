@@ -16,3 +16,4 @@ services:
 networks:
   caddy_network:
     driver: bridge
+    name: caddy_network
