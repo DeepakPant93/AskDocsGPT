@@ -95,8 +95,8 @@ Make sure to set the following environment variables before running the applicat
 
 The application is deployed on an AWS EC2 instance. You can access it using the following links:
 
-- **[Backend Server](http://ec2-13-202-202-157.ap-south-1.compute.amazonaws.com:8000/docs#)**
-- **[Client App](http://ec2-13-202-202-157.ap-south-1.compute.amazonaws.com:8502/)**
+- **[Backend Server](https://ec2-65-1-108-185.ap-south-1.compute.amazonaws.com/docs#)**
+- **[Client App](https://ec2-65-1-108-185.ap-south-1.compute.amazonaws.com/)**
 
 Use the blow credentials to access the backend server:
 
@@ -116,7 +116,7 @@ can ask questions like:
 ## Usage
 
 - Access the client interface through your web browser
-  at [here](http://ec2-13-202-202-157.ap-south-1.compute.amazonaws.com:8502).
+  at [here](https://ec2-65-1-108-185.ap-south-1.compute.amazonaws.com).
 - Enter your queries in the UI to receive answers sourced from the internal documents.
 
 ## License
