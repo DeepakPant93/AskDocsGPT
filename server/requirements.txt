@@ -12,3 +12,5 @@ pypdf==5.0.1  # For reading PDFs
 cryptography==43.0.1  # For using the OpenAI API
 langchain_pinecone==0.1.3  # For using the Pinecone vector database
 tiktoken==0.7.0  # For using the OpenAI API
+pytest==8.3.3  # For testing
+pytest-asyncio==0.24.0 # For async method testing

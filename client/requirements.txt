@@ -1,3 +1,5 @@
 streamlit==1.32.0 # For building the UI
 pydantic==1.10.4 # For data validation and parsing
 python-dotenv==1.0.0  # For environment variable management
+pytest==8.3.3  # For testing
+pytest-asyncio==0.24.0 # For async method testing

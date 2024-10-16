@@ -20,7 +20,7 @@ class QAService:
 
     NEGATIVE_RESPONSE_MSG = "I don't know. Please ask a question related to the knowledge base, as I can only provide answers based on that information."
 
-    async def ask(self, question: str):
+    async def ask(self, question: str) -> AnswerResponse:
         """
         Ask a question and get the answer with relevant source documents.
 

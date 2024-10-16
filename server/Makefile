@@ -7,6 +7,8 @@ TAG = latest
 PLATFORMS = linux/amd64,linux/arm64
 DOCKERFILE = Dockerfile
 BUILD_DIR = .
+TEST_DIR=tests
+TEST_RUNNER=pytest
 
 
 .PHONY: all
@@ -37,21 +39,21 @@ clean:
 # Setup for virtual environment and install the application requirements
 .PHONY: venv
 venv:
-	conda create --name .venv python=3.10 -y
-	conda init
+	conda create --name .venv python=3.10 -y && \
+	conda init && \
 	conda activate .venv
 
 
 # Activate the virtual environment
 .PHONY: venv-activate
 venv-activate:
-	conda activate .venv
+	conda init && conda activate .venv
 
 
 # Destroy the virtual environment
 .PHONY: destroy-venv
 destroy-venv:
-	conda deactivate
+	conda deactivate && \
 	rm -rf .venv
 
 # Run the application
@@ -70,3 +72,8 @@ install:
 .PHONY: docker-run
 docker-run:
 	docker-compose -f docker-compose.yml up -d --force-recreate
+
+# Run the test cases
+.PHONY: test
+test:
+	$(TEST_RUNNER) $(TEST_DIR)
