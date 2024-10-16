@@ -4,6 +4,7 @@
 # Variables
 PYTHON=python3
 TEST_RUNNER=pytest
+SOURCE_DIR=../src
 
 # Targets
 
@@ -16,6 +17,7 @@ all: test
 test:
 	$(TEST_RUNNER)
 
+
 # Target to run a specific test case
 .PHONY: test-case
 test-case:
@@ -24,6 +26,7 @@ test-case:
 		exit 1; \
 	fi
 	$(TEST_RUNNER) $(TEST_CASE)
+
 
 # Target to run tests from a specific module
 .PHONY: test-module
@@ -34,7 +37,8 @@ test-module:
 	fi
 	$(TEST_RUNNER) $(MODULE)
 
-# Target to clean __pycache__ directories
-.PHONY: clean
-clean:
-	find . -type d -name '__pycache__' -exec rm -rf {} +
+
+# Target to run code coverage
+.PHONY: coverage
+coverage:
+	$(TEST_RUNNER) --cov=$(SOURCE_DIR) --cov-report=term-missing
