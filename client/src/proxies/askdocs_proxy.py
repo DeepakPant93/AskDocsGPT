@@ -34,7 +34,7 @@ class AskDocsAPIProxy:
             response = requests.post(
                 url=f"{self.base_url}/docs/ask",
                 headers=self.headers,
-                json={'question': request})
+                json={'question': request}, verify=False)
             return AnswerResponse(**response.json())
         except Exception as e:
             logger.error(f"Failed to get answer from ask-docs backend service: {e}")
@@ -42,7 +42,7 @@ class AskDocsAPIProxy:
 
     async def health_check(self) -> Dict[str, str]:
         try:
-            response = requests.get(self.health_check_url)
+            response = requests.get(self.health_check_url, verify=False)
             logger.info(f"Health check passed for ask-docs backend service")
             return response.json()
         except Exception as e:
