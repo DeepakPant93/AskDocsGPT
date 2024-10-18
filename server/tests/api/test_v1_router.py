@@ -1,26 +1,29 @@
+import base64
 import os
 import sys
-
-# Add the parent directory of 'src' to sys.path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-
-import base64
 
 import pytest
 from fastapi.testclient import TestClient
 
-from main import app  # assuming your FastAPI app is defined in 'main.py'
-from src.schema.v1.schema import AnswerResponse
-from src.service.qa_service import QAService
+from ...src.core.config import settings
+from ...src.schema.v1.schema import AnswerResponse
 
 # Create a TestClient for testing FastAPI routes
-client = TestClient(app)
-from ...src.core.config import settings
+client = None
 
 
 # Define a fixture to mock the QAService dependency
 @pytest.fixture
 def mock_qa_service(monkeypatch):
+    # Add the parent directory of 'src' to sys.path
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+    from src.service.qa_service import QAService
+    from main import app
+
+    # Initialize the TestClient
+    global client
+    client = TestClient(app)
+
     async def mock_ask(self, question):
         return AnswerResponse(answer="This capital is Paris.")
 
