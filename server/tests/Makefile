@@ -45,6 +45,6 @@ coverage:
 
 
 # Target to run test cases with allure report
-.PHONY: allure
-allure:
+.PHONY: report
+report:
 	$(TEST_RUNNER) --alluredir=allure-results && allure serve allure-results

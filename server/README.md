@@ -10,6 +10,7 @@
 - [Documentation](#documentation)
 - [Environment Variables](#environment-variables)
 - [Setup Guide](#setup-guide)
+- [Testing Guide](#testing-guide)
 
 ## Overview
 
@@ -77,3 +78,7 @@ Make sure to configure the following environment variables to start the server:
 ## Setup Guide
 
 Please refer to the [Setup Guide](docs/SETUP.md) for a more detailed setup process.
+
+## Testing Guide
+
+Please refer to the [Testing Guide](tests/README.md) for more details on the test configuration.

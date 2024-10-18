@@ -28,6 +28,9 @@ Clean up the buildx builder and remove the Docker image and unused networks.
 ### 8. `make docker-run`
 Run the Emailer_Worker application within a Docker container using Docker Compose.
 
+### 9. `make test`
+Run the unit tests using pytest.
+
 ## Additional Notes
 
 - Ensure you have the required software installed (Docker, Docker Compose, Conda, and Python).
