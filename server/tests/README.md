@@ -56,5 +56,16 @@ You can run all the test cases using the following `make` command:
 | `make report`                           | Runs the tests and generates an Allure HTML report.                                                                      |
 
 
-
 This will run the tests, collect the report data, and generate an Allure HTML report, which can be viewed for detailed insights into the test results.
+
+## Additional Notes
+To run the Allure report, you need to install Allure. Here are the commands to install Allure on Linux, Windows, and Mac:
+
+| **Operating System** | **Command to Install Allure**                                                                                                                   |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Linux**            | Install via package manager: <br> ```sudo apt-add-repository ppa:qameta/allure``` <br> ```sudo apt update``` <br> ```sudo apt install allure``` |
+| **Windows**          | Install via Scoop (recommended): <br> ```scoop install allure```                                                                                |
+| **Mac**              | Install using Homebrew: <br> ```brew install allure```                                                                                          |
+
+Use `allure --version` to confirm that Allure has been installed correctly on your system.
+
