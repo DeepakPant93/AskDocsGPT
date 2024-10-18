@@ -42,3 +42,9 @@ test-module:
 .PHONY: coverage
 coverage:
 	$(TEST_RUNNER) --cov=$(SOURCE_DIR) --cov-report=term-missing
+
+
+# Target to run test cases with allure report
+.PHONY: allure
+allure:
+	$(TEST_RUNNER) --alluredir=allure-results && allure serve allure-results

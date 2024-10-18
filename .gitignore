@@ -178,3 +178,4 @@ caddy_config/
 
 # Code Coverage
 .coverage
+allure-results/
