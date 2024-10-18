@@ -35,6 +35,9 @@ class AskDocsAPIProxy:
                 url=f"{self.base_url}/docs/ask",
                 headers=self.headers,
                 json={'question': request}, verify=False)
+
+            logger.info(f"Got answer from ask-docs backend service")
+            logger.debug(f"Response: {response.json()}")
             return AnswerResponse(**response.json())
         except Exception as e:
             logger.error(f"Failed to get answer from ask-docs backend service: {e}")
